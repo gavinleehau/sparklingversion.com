@@ -1,0 +1,105 @@
+{% extends "homebase.html" %}
+{% load static  %}
+{% block content %}
+<div id="colorlib-main">
+    <section class="home-slider js-fullheight owl-carousel">
+        <div class="slider-item js-fullheight" style="background-image:url(/static/images/bg_2.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row no-gutters slider-text slider-text-2 js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+                    <div class="col-md-10 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Discover the Place</h1>
+                        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay, eat, shop, or visit from local experts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-item js-fullheight" style="background-image:url(/static/images/bg_3.jpg);">
+            <div class="overlay"></div>
+            <div class="container-fluid">
+                <div class="row no-gutters slider-text slider-text-2 js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+                    <div class="col-md-10 text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Explore and travel</h1>
+                        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay, eat, shop, or visit from local experts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- main content -->
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        {% for blog in page.object_list %}
+                            <div class="col-md-12">
+                                <div class="blog-entry ftco-animate">
+                                    <a href="{% url 'blog_detail' blog_id=blog.id %}" class="img" style="background-image: url({{blog.image.url}});"></a>
+                                    <div class="text pt-2 mt-3">
+                                        <span class="category mb-1 d-block"><a href="#">Technology</a></span>
+                                        <h3 class="mb-4"><a href="#">{{blog.title}}</a></h3>
+                                        <p class="mb-4">{{blog.content|safe|truncatewords:30}}</p>
+                                        <div class="author mb-4 d-flex align-items-center">
+                                            <a href="{% url 'about'%}" class="img" style="background-image: url({{info.avatar.url}});"></a>
+                                            <div class="ml-3 info">
+                                                <span>Written by</span>
+                                                <h3><a href="{% url 'about'%}">{{blog.author_name}}</a>, <span>{{blog.date}}</span></h3>
+                                            </div>
+                                        </div>
+                                        <div class="meta-wrap d-md-flex align-items-center">
+                                            <div class="meta-wrap d-md-flex align-items-center">
+                                                <div class="half">
+                                                    <p><a href="{% url 'blog_detail' blog_id=blog.id %}" class="btn btn-primary p-3 px-xl-4 py-xl-3">Đọc thêm</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col">
+                            <div class="block-27">
+                                <ul>
+                                    {% if page.has_previous %}
+                                    	<li><a href="{% url 'blog' %}?page={{page.previous_page_number}}">&lt;</a></li>
+                                    {% else %}
+                                    	<li><a class="disabled" style="display: none;">&lt;</a></li>
+                                    {% endif %}
+
+                                    {% for i in page.paginator.page_range %}
+                                        {% if page.number == i %}
+                                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                        {% elif i > page.number|add:'-3' and i < page.number|add:'3' %}
+                                        <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if page.has_next %}
+                                    	<li><a href="{% url 'blog' %}?page={{page.next_page_number}}">&gt;</a></li>
+                                    {% else %}
+                                    	<li><a class="" style="display: none;">&gt;</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END-->
+                <div class="col-lg-4 sidebar ftco-animate">
+                    <div class="sidebar-box ftco-animate">
+                        <h3 class="sidebar-heading">Paragraph</h3>
+                        <p>{{paragraph_body.paragraph}}</p>
+                    </div>
+                </div>
+                <!-- END COL -->
+            </div>
+        </div>
+    </section>
+    <!-- End main content -->
+</div>
+<!-- END COLORLIB-MAIN -->
+{% include "footer.html" %}
+{% endblock content %}

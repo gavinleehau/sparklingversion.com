@@ -1,0 +1,180 @@
+{% extends "homebase.html" %}
+{% load static  %}
+{% block content %}
+<div id="colorlib-page">
+    <div id="colorlib-main">
+        <div class="hero-wrap js-fullheight" style="background-image: url(/static/images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="js-fullheight d-flex justify-content-center align-items-center">
+                <div class="col-md-8 text text-center">
+                    <div class="desc">
+                        <h1 class="mb-4">Blog</h1>
+                        <!-- <p><a href="index" class="btn-custom mr-2">Home <span class="ion-ios-arrow-forward"></span></a> <a href="index" class="btn-custom mr-2">Blog <span class="ion-ios-arrow-forward"></span></a> <a href="index" class="btn-custom">Single <span class="ion-ios-arrow-forward"></span></a></p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 ftco-animate">
+                        <h2 class="mb-3 font-weight-bold">{{blog_detail.title}}</h2>
+                        <p>
+                            <img src="{{blog_detail.image.url}}" alt="" class="img-fluid">
+                        </p>
+                        {{blog_detail.content|safe}}
+                        <div class="tag-widget post-tag-container mb-5 mt-5">
+                            <div class="tagcloud">
+                                <a href="#" class="tag-cloud-link">{{blog_detail.hashtag}}</a>
+                            </div>
+                        </div>
+                        <div class="about-author d-flex p-4 bg-light">
+                            <div class="bio mr-5">
+                                <img src="{{info.avatar.url}}" alt="Image placeholder" class="img-fluid mb-4">
+                            </div>
+                            <div class="desc">
+                                <h3>{{info.fullName}}</h3>
+                                <p>{{info.description|safe}}</p>
+                            </div>
+                        </div>
+
+
+                        <!-- comment -->
+						<div class="pt-5 mt-5">
+							<h3 class="mb-5 font-weight-bold">{{comment_count}} Comments</h3>
+							<ul class="comment-list">
+								{% for comment in comments %}
+									<li class="comment">
+										<div class="vcard bio">
+											<img src="/static/images/person_1.jpg" alt="Image placeholder">
+										</div>
+										<div class="comment-body">
+											<h3>{{comment.name}}</h3>
+											<div class="meta">October 03, 2018 at 2:21pm</div>
+											<p>{{comment.body}}</p>
+											<p><a href="#" class="reply">Reply</a></p>
+										</div>
+									</li>
+								{% endfor %}
+								
+								<!-- <li class="comment">
+									<div class="vcard bio">
+										<img src="/static/images/person_1.jpg" alt="Image placeholder">
+									</div>
+									<div class="comment-body">
+										<h3>John Doe</h3>
+										<div class="meta">October 03, 2018 at 2:21pm</div>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+										<p><a href="#" class="reply">Reply</a></p>
+									</div>
+									<ul class="children">
+										<li class="comment">
+											<div class="vcard bio">
+												<img src="/static/images/person_1.jpg" alt="Image placeholder">
+											</div>
+											<div class="comment-body">
+												<h3>John Doe</h3>
+												<div class="meta">October 03, 2018 at 2:21pm</div>
+												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+												<p><a href="#" class="reply">Reply</a></p>
+											</div>
+											<ul class="children">
+												<li class="comment">
+													<div class="vcard bio">
+														<img src="/static/images/person_1.jpg" alt="Image placeholder">
+													</div>
+													<div class="comment-body">
+														<h3>John Doe</h3>
+														<div class="meta">October 03, 2018 at 2:21pm</div>
+														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+														<p><a href="#" class="reply">Reply</a></p>
+													</div>
+													<ul class="children">
+														<li class="comment">
+															<div class="vcard bio">
+																<img src="/static/images/person_1.jpg" alt="Image placeholder">
+															</div>
+															<div class="comment-body">
+																<h3>John Doe</h3>
+																<div class="meta">October 03, 2018 at 2:21pm</div>
+																<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+																<p><a href="#" class="reply">Reply</a></p>
+															</div>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li class="comment">
+									<div class="vcard bio">
+										<img src="/static/images/person_1.jpg" alt="Image placeholder">
+									</div>
+									<div class="comment-body">
+										<h3>John Doe</h3>
+										<div class="meta">October 03, 2018 at 2:21pm</div>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
+										<p><a href="#" class="reply">Reply</a></p>
+									</div>
+								</li> -->
+
+
+								<!-- END comment-list -->
+								<div class="comment-form-wrap pt-5">
+									<h3 class="mb-5">Leave a comment</h3>
+									<form method="post" action="/blog/addcomment/{{blog_id}}" class="p-3 p-md-5 bg-light">
+										{% csrf_token %}
+										<div class="form-group">
+											<label for="name">Name *</label>
+											<input name="name" type="text" class="form-control" id="name">
+										</div>
+										<div class="form-group">
+											<label for="message">Message</label>
+											<textarea name="comment" id="message" cols="30" rows="10" class="form-control"></textarea>
+										</div>
+										<div class="form-group">
+											<input type="submit" value="Post Comment" class="btn py-3 px-4 btn-primary">
+										</div>
+									</form>
+								</div>
+							</ul>
+
+							
+						</div>
+						<!-- comment -->
+                    </div>
+
+                    <!-- .col-md-8 -->
+                    <div class="col-lg-4 sidebar ftco-animate">
+                        <div class="sidebar-box ftco-animate">
+                            <h3 class="sidebar-heading">Popular Articles</h3>
+                            {% for blog in Latest_blogs %}
+								<div class="block-21 mb-4 d-flex">
+									<a class="blog-img mr-4" style="background-image: url({{blog.image.url}});"></a>
+									<div class="text">
+										<h3 class="heading"><a href="#">{{blog.title}}</a></h3>
+										<div class="meta">
+											<div><a href="#"><span class="icon-calendar"></span> {{blog.date}}</a></div>
+											<div><a href="#"><span class="icon-person"></span>{{blog.author_name}}</a></div>
+											<!-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+										</div>
+									</div>
+								</div>
+                            {% endfor %}
+                        </div>
+                        <div class="sidebar-box ftco-animate">
+                            <h3 class="sidebar-heading">Paragraph</h3>
+                            <p>{{paragraph_body.paragraph}}</p>
+                        </div>
+                    </div>
+                    <!-- END COL -->
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- END COLORLIB-MAIN -->
+</div>
+<!-- END COLORLIB-PAGE -->
+{% include "footer.html" %}
+{% endblock content %}
